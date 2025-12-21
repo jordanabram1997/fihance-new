@@ -8,6 +8,13 @@
       "when": 1766286098845,
       "tag": "0000_legal_shen",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766327998750,
+      "tag": "0001_blushing_tarot",
+      "breakpoints": true
     }
   ]
 }
