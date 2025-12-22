@@ -184,3 +184,26 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.glow-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  background-color: rgb(34 197 94 / 0.1);
+  filter: blur(120px);
+  animation: pulse-glow 4s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+}

@@ -7,9 +7,8 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Loader2, Mail } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Loader2, CheckCircle2, ArrowRight } from "lucide-react";
 
 const waitlistSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -61,70 +60,57 @@ export function WaitlistSignup() {
 
   if (isSuccess) {
     return (
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-primary/10">
-            <Mail className="size-6 text-primary" />
-          </div>
-          <CardTitle>You&apos;re on the list!</CardTitle>
-          <CardDescription>
-            We&apos;ll send you an email when we launch. Thanks for your interest!
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="w-full max-w-2xl">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+          <CheckCircle2 className="size-5 text-green-500 shrink-0" />
+          <p className="text-white font-medium text-sm sm:text-base text-center sm:text-left">You&apos;re on the list! We&apos;ll notify you when we launch.</p>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="text-center">
-        <CardTitle className="text-2xl">Join the Waitlist</CardTitle>
-        <CardDescription>
-          Be the first to know when we launch. Get early access to Fihance.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email address</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="you@example.com"
-                      disabled={isSubmitting}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 size-4 animate-spin" />
-                  Joining...
-                </>
-              ) : (
-                <>
-                  <Mail className="mr-2 size-4" />
-                  Join Waitlist
-                </>
-              )}
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="flex-1 min-w-0">
+                <FormControl>
+                  <Input
+                    type="email"
+                    placeholder="Enter your email"
+                    disabled={isSubmitting}
+                    className="h-14 sm:h-16 w-full text-base sm:text-lg bg-neutral-800/90 border-2 border-neutral-700/50 text-white placeholder:text-neutral-500 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30 px-5 sm:px-6 rounded-xl transition-all"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs sm:text-sm mt-2" />
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="group h-14 sm:h-16 px-8 sm:px-12 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto sm:whitespace-nowrap relative overflow-hidden rounded-xl shadow-lg hover:shadow-primary/20 transition-all"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 size-5 animate-spin" />
+                Joining...
+              </>
+            ) : (
+              <>
+                <span className="group-hover:opacity-0 transition-opacity duration-300">Join waitlist</span>
+                <ArrowRight className="absolute inset-0 m-auto size-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </>
+            )}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }
 
