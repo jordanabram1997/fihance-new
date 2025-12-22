@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "eslint",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "dotenv -e .env.local -e .env -- tsx lib/db/migrate.ts",
-    "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:check": "drizzle-kit check",
+    "db:pull": "drizzle-kit pull",
+    "db:introspect": "drizzle-kit introspect"
   },
   "dependencies": {
     "@daveyplate/better-auth-ui": "^3.3.9",
@@ -75,7 +77,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "dotenv": "^17.2.3",
     "dotenv-cli": "^11.0.0",
-    "drizzle-kit": "^0.18.1",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9",
     "eslint-config-next": "16.1.0",
     "tailwindcss": "^4.1.18",

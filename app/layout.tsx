@@ -17,11 +17,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
-      <body className="flex min-h-svh flex-col antialiased">
-        <Providers className="flex-1 flex flex-col">{children}</Providers>
-        <Toaster />
-      </body>
-    </html>
+    <html lang="en" suppressHydrationWarning>
+    <body
+      className={`antialiased`}
+    >
+      <Providers>
+        {children}
+      </Providers>
+      <Toaster />
+    </body>
+  </html>
   );
 }
