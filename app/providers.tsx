@@ -8,28 +8,36 @@ import type { ReactNode } from "react"
 
 import { authClient } from "@/lib/db/auth-client"
 
-export function Providers({ children }: { children: ReactNode }) {
-    const router = useRouter()
+export function Providers({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  const router = useRouter();
 
-    return (
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+  return (
+    <div className={className}>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <AuthUIProvider
+          authClient={authClient}
+          navigate={router.push}
+          replace={router.replace}
+          onSessionChange={() => {
+            // Clear router cache (protected routes)
+            router.refresh();
+          }}
+          Link={Link}
         >
-            <AuthUIProvider
-                authClient={authClient}
-                navigate={router.push}
-                replace={router.replace}
-                onSessionChange={() => {
-                    // Clear router cache (protected routes)
-                    router.refresh()
-                }}
-                Link={Link}
-            >
-                {children}
-            </AuthUIProvider>
-        </ThemeProvider>
-    )
+          {children}
+        </AuthUIProvider>
+      </ThemeProvider>
+    </div>
+  );
 }
