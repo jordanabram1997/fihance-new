@@ -15,6 +15,13 @@
       "when": 1766327998750,
       "tag": "0001_blushing_tarot",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1766404813640,
+      "tag": "0002_public_zaladane",
+      "breakpoints": true
     }
   ]
 }
