@@ -1,0 +1,1 @@
+ALTER TABLE "bills" ALTER COLUMN "organization_id" SET DATA TYPE text;

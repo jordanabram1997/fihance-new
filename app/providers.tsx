@@ -2,11 +2,11 @@
 
 import { AuthUIProvider } from "@daveyplate/better-auth-ui"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { ThemeProvider } from "next-themes"
 import type { ReactNode } from "react"
 
-import { authClient } from "@/lib/db/auth-client"
+import { authClient } from "@/lib/integrations/auth/auth-client"
 
 export function Providers({
   children,
@@ -16,7 +16,7 @@ export function Providers({
   className?: string;
 }) {
   const router = useRouter();
-
+  
   return (
     <div className={className}>
       <ThemeProvider
@@ -32,6 +32,16 @@ export function Providers({
           onSessionChange={() => {
             // Clear router cache (protected routes)
             router.refresh();
+          }}
+          organization={{
+            logo: {
+              upload: async (file) => {
+                // Your upload logic
+                return "https://example.com/logo.png"
+              },
+              size: 256,
+              extension: "png"
+            },
           }}
           Link={Link}
         >

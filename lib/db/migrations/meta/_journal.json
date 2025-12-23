@@ -36,6 +36,34 @@
       "when": 1766417407499,
       "tag": "0004_smiling_dagger",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1766462645151,
+      "tag": "0005_real_praxagora",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1766462863513,
+      "tag": "0006_absurd_clint_barton",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1766463107013,
+      "tag": "0007_youthful_johnny_blaze",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1766464191151,
+      "tag": "0008_dusty_miek",
+      "breakpoints": true
     }
   ]
 }

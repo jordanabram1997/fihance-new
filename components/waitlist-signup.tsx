@@ -83,7 +83,7 @@ export function WaitlistSignup() {
                     type="email"
                     placeholder="Enter your email"
                     disabled={isSubmitting}
-                    className="h-14 sm:h-16 w-full text-base sm:text-lg bg-neutral-800/90 border-2 border-neutral-700/50 text-white placeholder:text-neutral-500 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30 px-5 sm:px-6 rounded-xl transition-all"
+                    className="h-14 sm:h-16 w-full text-base sm:text-lg text-white border-none placeholder:text-neutral-500 focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/30 px-5 sm:px-6 rounded-xl transition-all"
                     {...field}
                   />
                 </FormControl>

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { WaitlistSignup } from "@/components/waitlist-signup";
+import { Logo } from "@/components/logo";
 
 export default function WaitlistPage() {
   return (
@@ -19,21 +19,8 @@ export default function WaitlistPage() {
         }}
       />
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center">
-        <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700 drop-shadow-lg">
-          <Image
-            src="/branding/logo-white.png"
-            className="hidden dark:block drop-shadow-lg"
-            alt="Fihance"
-            width={64}
-            height={64}
-          />
-          <Image
-            src="/branding/logo-black.png"
-            className="block dark:hidden drop-shadow-lg"
-            alt="Fihance"
-            width={64}
-            height={64}
-          />
+        <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <Logo />
         </div>
 
         {/* Hero Section */}

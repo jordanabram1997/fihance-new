@@ -1,0 +1,1 @@
+ALTER TABLE "bills" RENAME COLUMN "payee_name" TO "bill_name";
