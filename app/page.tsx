@@ -1,7 +1,27 @@
+"use client";
+
 import { WaitlistSignup } from "@/components/waitlist-signup";
 import { Logo } from "@/components/logo";
+import { SignedIn, SignedOut, UserButton } from "@daveyplate/better-auth-ui";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function WaitlistPage() {
+  const [showNav, setShowNav] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Check for CTRL + A (or CMD + A on Mac)
+      if ((e.ctrlKey || e.metaKey) && e.key === "a") {
+        e.preventDefault(); // Prevent default select all behavior
+        setShowNav((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <main className="relative min-h-screen w-full bg-black flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden">
       {/* Stellar Mist */}
@@ -19,6 +39,23 @@ export default function WaitlistPage() {
         }}
       />
       <div className="relative z-10 w-full max-w-6xl flex flex-col items-center">
+        {showNav && (
+          <nav className="fixed top-4 right-4 z-50 animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="bg-neutral-900/90 backdrop-blur-md border border-neutral-700/60 rounded-lg px-4 py-3 shadow-xl">
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+              <SignedOut>
+                <Link 
+                  href="/auth/sign-in"
+                  className="text-neutral-300 hover:text-white transition-colors font-medium"
+                >
+                  Sign In
+                </Link>
+              </SignedOut>
+            </div>
+          </nav>
+        )}
         <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <Logo />
         </div>
@@ -34,7 +71,7 @@ export default function WaitlistPage() {
         </div>
 
         <div className="mb-20 w-full flex justify-center px-4 sm:px-0 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200 max-w-2xl">
-        <WaitlistSignup />
+          <WaitlistSignup />
         </div>
 
         {/* Feature Cards */}
