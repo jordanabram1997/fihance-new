@@ -64,6 +64,13 @@
       "when": 1766464191151,
       "tag": "0008_dusty_miek",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1766503575339,
+      "tag": "0009_good_tarot",
+      "breakpoints": true
     }
   ]
 }

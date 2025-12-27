@@ -196,6 +196,74 @@ body {
   }
 }
 
+@keyframes gradientMesh1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.1) rotate(90deg);
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    transform: translate(-20px, 30px) scale(0.9) rotate(180deg);
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+  }
+  75% {
+    transform: translate(40px, 20px) scale(1.05) rotate(270deg);
+    border-radius: 40% 60% 50% 50% / 60% 40% 50% 50%;
+  }
+}
+
+@keyframes gradientMesh2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+  }
+  33% {
+    transform: translate(-40px, 50px) scale(1.15) rotate(120deg);
+    border-radius: 60% 40% 50% 50% / 40% 60% 50% 50%;
+  }
+  66% {
+    transform: translate(35px, -30px) scale(0.85) rotate(240deg);
+    border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
+  }
+}
+
+@keyframes gradientMesh3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    border-radius: 40% 60% 50% 50% / 50% 50% 60% 40%;
+  }
+  20% {
+    transform: translate(50px, 35px) scale(1.08) rotate(72deg);
+    border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%;
+  }
+  40% {
+    transform: translate(-30px, -40px) scale(0.92) rotate(144deg);
+    border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+  }
+  60% {
+    transform: translate(35px, -25px) scale(1.05) rotate(216deg);
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+  }
+  80% {
+    transform: translate(-25px, 35px) scale(0.95) rotate(288deg);
+    border-radius: 30% 70% 50% 50% / 50% 50% 70% 30%;
+  }
+}
+
+@keyframes gradientMesh4 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    border-radius: 70% 30% 50% 50% / 50% 50% 30% 70%;
+  }
+  50% {
+    transform: translate(-50px, 60px) scale(1.2) rotate(180deg);
+    border-radius: 30% 70% 60% 40% / 70% 30% 40% 60%;
+  }
+}
+
 .glow-circle {
   position: absolute;
   top: 50%;
@@ -206,4 +274,58 @@ body {
   filter: blur(120px);
   animation: pulse-glow 4s ease-in-out infinite;
   transform: translate(-50%, -50%);
+}
+
+
+.geometric-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: 
+    linear-gradient(135deg, rgba(107, 114, 128, 0.08) 0%, transparent 50%),
+    linear-gradient(45deg, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+  overflow: hidden;
+}
+
+.geometric-bg::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: 
+    linear-gradient(135deg, rgba(107, 114, 128, 0.15) 0%, rgba(107, 114, 128, 0.05) 50%, transparent 100%);
+  clip-path: polygon(30% 0%, 100% 0%, 70% 100%, 0% 100%);
+  transform: rotate(45deg);
+}
+
+.geometric-bg::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  width: 1px;
+  height: 400px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(107, 114, 128, 0.2) 20%,
+    rgba(107, 114, 128, 0.2) 80%,
+    transparent
+  );
+  transform: rotate(45deg);
+  transform-origin: top center;
+}
+
+@media (min-width: 1024px) {
+  .geometric-bg::before {
+    width: 800px;
+    height: 800px;
+  }
+  
+  .geometric-bg::after {
+    height: 600px;
+  }
 }

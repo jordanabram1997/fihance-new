@@ -1,48 +1,40 @@
 import { nanoid } from "@/lib/utils/nanoid";
-import { char, date, index, numeric, pgEnum, pgTable, text, uuid, varchar } from "drizzle-orm/pg-core";
+import { char, date, index, numeric, pgEnum, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
 
+// --- ENUMS ---
 
 export const billStatusEnum = pgEnum("bill_status", [
-    "upcoming",
-    "paid",
-    "overdue",
-    "cancelled",
+  "upcoming",
+  "paid",
+  "cancelled", // omit 'overdue' for MVP; can compute in queries
 ]);
 
-export const recurrenceFrequencyEnum = pgEnum(
-    "recurrence_frequency",
-    ["daily", "weekly", "monthly", "yearly"]
-);
-
+// --- TABLES ---
 
 export const bills = pgTable("bills", {
-    id: varchar("id", { length: 20 }).primaryKey().$defaultFn(() => nanoid()),
-    // Bill Details 
-    billName: text("bill_name").notNull(),
-    amount: numeric("amount", { precision: 10, scale: 2 }).notNull(),
-    currency: char("currency", { length: 3 }).default("GBP"),
-    dueDate: date("due_date").notNull(),
-    status: billStatusEnum("status").notNull(),
-    
-    // // Recurrence
-    // recurrenceFrequency: recurrenceFrequencyEnum("recurrence_frequency"),
-    // recurrenceInterval: integer("recurrence_interval").default(1),
+  // Primary Key
+  id: varchar("id", { length: 20 }).primaryKey().$defaultFn(() => nanoid()),
 
-    // Ownership
-    organizationId: uuid("organization_id").notNull(),
-    
-    // // Responsibility (optional)
-    // assignedUserId: uuid("assigned_user_id"),
-    
-    // // Audit
-    // paidAt: timestamp("paid_at"),
-    // createdByUserId: uuid("created_by_user_id").notNull(),
-    // createdAt: timestamp("created_at").defaultNow(),
-    // updatedAt: timestamp("updated_at").defaultNow().$onUpdate(() => new Date()),
+  // Bill Details
+  billName: text("bill_name").notNull(),
+  amount: numeric("amount", { precision: 10, scale: 2 }).notNull(),
+  currency: char("currency", { length: 3 }).notNull().default("GBP"),
+  dueDate: date("due_date").notNull(),
+  status: billStatusEnum("status").notNull().default("upcoming"),
 
+  // Ownership & Responsibility
+  organizationId: text("organization_id").notNull(),
+  assignedUserId: text("assigned_user_id"), // must be validated in app code
+  createdByUserId: text("created_by_user_id").notNull(),
+
+  // Audit
+  paidAt: timestamp("paid_at"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow().$onUpdate(() => new Date()),
 }, (table) => [
-    // index("bills_userId_idx").on(table.userId),
-    index("bills_org_idx").on(table.organizationId),    
-    index("bills_status_idx").on(table.status),
-    index("bills_due_date_idx").on(table.dueDate),
+  // Indexes for faster queries
+  index("bills_org_idx").on(table.organizationId),
+  index("bills_status_idx").on(table.status),
+  index("bills_due_date_idx").on(table.dueDate),
+  index("bills_org_status_due_idx").on(table.organizationId, table.status, table.dueDate),
 ]);

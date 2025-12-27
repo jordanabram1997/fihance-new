@@ -34,7 +34,7 @@ export default function BillForm({
   const editing = !!bill?.id;
 
   const form = useForm<NewBillParams>({
-    resolver: process.env.NODE_ENV === "development" ? zodResolver(insertBillParams) : undefined,
+    resolver: zodResolver(insertBillParams),
     defaultValues: {
       ...bill,
     },
@@ -46,12 +46,19 @@ export default function BillForm({
   const handleSubmit = async (data: NewBillParams) => { 
     const payload = {
       ...data,
-      currency: data.currency ?? null,
+      currency: data.currency ?? "GBP",
     };
 
     try {
-      if (editing) {
-        await updateBillAction(bill?.id, payload);
+      if (editing && bill) {
+        await updateBillAction(bill.id, {
+          ...payload,
+          status: payload.status ?? bill.status ?? "upcoming",
+          assignedUserId: payload.assignedUserId ?? bill.assignedUserId ?? null,
+          paidAt: bill.paidAt ?? null,
+          updatedAt: new Date(),
+          createdAt: bill.createdAt,
+        });
         router.push(`/test`);
         return;
       }

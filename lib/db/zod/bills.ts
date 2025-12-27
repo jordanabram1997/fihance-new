@@ -7,6 +7,8 @@ const baseSchema = createSelectSchema(bills);
 export const insertBillSchema = createInsertSchema(bills).omit({
     id: true,
     organizationId: true,
+    paidAt: true,
+    updatedAt: true,
 })
 
 export const insertBillParams = insertBillSchema;
